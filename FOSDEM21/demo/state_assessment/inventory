@@ -1,0 +1,7 @@
+localhost connection=local
+
+[centos]
+centos01 ansible_host=changeme ansible_user=changeme ansible_ssh_pass=changeme
+
+[nxos]
+nxos01 ansible_host=changeme ansible_user=changeme ansible_ssh_pass=changeme

@@ -1,0 +1,17 @@
+---
+- hosts: nxos
+  connection: ansible.netcommon.network_cli
+  gather_facts: false
+  vars:
+    ansible_network_os: cisco.nxos.nxos
+  tasks:
+  - name: "Fetch interface state and parse with pyats"
+    ansible.utils.cli_parse:
+      command: show interface loopback 0-1
+      parser:
+        name: ansible.netcommon.pyats
+    register: nxos_pyats_show_interface
+
+  - name: print structured interface state data
+    ansible.builtin.debug:
+      msg: "{{ nxos_pyats_show_interface['parsed'] }}"

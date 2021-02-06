@@ -1,0 +1,11 @@
+---
+- hosts: nxos
+  gather_facts: false
+  tasks:
+  - name: validate bgp data data with jsonschema bgp model criteria
+    ansible.utils.validate:
+      data: "{{ hostvars }}"
+      criteria:
+        - "{{ lookup('file', './validate/criterias/bgp_input_data_model.json') |  from_json }}"
+      engine: ansible.utils.jsonschema
+    register: result

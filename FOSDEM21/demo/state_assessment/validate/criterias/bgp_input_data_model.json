@@ -1,0 +1,21 @@
+{
+  "patternProperties": {
+    ".*" : { "$ref" : "#/definitions/router" }
+  },
+  "minProperties": 1,
+  "definitions": {
+        "router" : {
+          "type" : "object",
+          "properties": {
+            "bgp_as": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 65535
+            },
+            "hostname": {
+              "type": "string"
+            }
+          }
+        }
+  }
+}

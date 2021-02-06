@@ -1,0 +1,30 @@
+- hosts: centos
+  gather_facts: True
+  tasks:
+  - name: debug
+    debug:
+      msg: "{{ ansible_distribution|d }}"
+
+  - name: "Run ifconfig command and parse with textfsm"
+    ansible.utils.cli_parse:
+      command: "ifconfig"
+      parser:
+        name: ansible.utils.textfsm
+      set_fact: ifconfig_facts
+    register: ifconfig_out
+
+  - name: print ifconfig structured data (textfsm)
+    debug:
+      msg: "{{ ifconfig_out }}"
+
+  - name: "Run command and parse with ttp"
+    ansible.utils.cli_parse:
+      command: "df -h"
+      parser:
+        name: ansible.utils.ttp
+      set_fact: dfh_facts
+    register: dfh_out
+
+  - name: print df-h structured data (ttp)
+    debug:
+      msg: "{{ dfh_out }}"
